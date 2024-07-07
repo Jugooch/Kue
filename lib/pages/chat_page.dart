@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kue/custom_scaffold.dart';
+import 'package:kue/styling.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
-        title: const Text('Chat'),
+        title: Image.asset('assets/images/logo.png'),
+        backgroundColor: primaryDarkColor,
       ),
       body: Center(
         child: Column(

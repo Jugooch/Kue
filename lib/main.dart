@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kue/custom_scaffold.dart';
+import 'package:kue/pages/subpages/subpages.dart';
+import 'package:kue/styling.dart';
 import './pages/pages.dart';
 
 void main() {
@@ -20,6 +23,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const LoginPage(),
         '/signup': (context) => const SignupProcess(),
+        '/signup_2': (context) => const SignupStep2(),
+        '/signup_3': (context) => const SignupStep3(),
+        '/signup_4': (context) => const SignupStep4(),
+        '/signup_5': (context) => const SignupStep5(),
+        '/signup_6': (context) => const SignupStep6(),
+        '/signup_7': (context) => const SignupStep7(),
         '/home': (context) => const MyHomePage(),
         '/matches': (context) => const MatchesPage(),
         '/profile': (context) => const ProfilePage(),
@@ -41,6 +50,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
+  // Example boolean for indicating new matches
+  bool hasNewMatches = true;
+
   static const List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     MatchesPage(),
@@ -55,10 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Kue'),
+        backgroundColor: primaryDarkColor,
+        title: Image.asset('assets/logos/logo.png'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -72,13 +84,31 @@ class _MyHomePageState extends State<MyHomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        backgroundColor: primaryDarkColor,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.view_carousel),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
+            icon: Stack(
+              children: [
+                Icon(Icons.favorite),
+                if (hasNewMatches)
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: error,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
             label: 'Matches',
           ),
           BottomNavigationBarItem(
@@ -87,7 +117,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: primaryColor,
+        unselectedItemColor: primaryLightColor,
         onTap: _onItemTapped,
       ),
     );

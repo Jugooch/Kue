@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kue/custom_scaffold.dart';
 import 'package:kue/styling.dart';
+import 'package:kue/widgets/progress_bar.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SignupStep6 extends StatelessWidget {
+  const SignupStep6({super.key});
 
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-      appBar: AppBar(
+            appBar: AppBar(
         title: Image.asset('assets/logos/logo.png'),
         backgroundColor: primaryDarkColor,
         foregroundColor: primaryLightColor,
@@ -17,18 +18,14 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('Settings Page Content'),
-            Container(width: double.infinity, child: ElevatedButton(
-              style: errorBtn,
+            const ProgressBar(currentStep: 6),
+            const Text('Signup Step 6 Content'),
+            ElevatedButton(
               onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  '/',
-                  (Route<dynamic> route) => false,
-                );
+                Navigator.pushNamed(context, '/signup_7');
               },
-              child: const Text('Log Out'),
-            ),)
+              child: const Text('Next'),
+            ),
           ],
         ),
       ),

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kue/custom_scaffold.dart';
+import 'package:kue/styling.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CustomScaffold(
       appBar: AppBar(
-        title: const Text('Edit Profile'),
+        title: Image.asset('assets/images/logo.png'),
+        backgroundColor: primaryDarkColor,
       ),
       body: Center(
         child: Column(
