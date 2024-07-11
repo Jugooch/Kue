@@ -16,12 +16,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Kue',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF9067C6)),
         useMaterial3: true,
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginPage(),
+        '/forgot_password': (context) => const ForgotPassword(),
+        '/forgot_password2': (context) => const ForgotPassword2(),
         '/signup': (context) => const SignupProcess(),
         '/signup_2': (context) => const SignupStep2(),
         '/signup_3': (context) => const SignupStep3(),
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/signup_6': (context) => const SignupStep6(),
         '/signup_7': (context) => const SignupStep7(),
         '/home': (context) => const MyHomePage(),
+        '/expand_user': (context) => const ExpandedUser(),
         '/matches': (context) => const MatchesPage(),
         '/profile': (context) => const ProfilePage(),
         '/edit_profile': (context) => const EditProfilePage(),

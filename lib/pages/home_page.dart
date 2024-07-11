@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage> {
           child: GestureDetector(
             onTap: () {
               // Handle card tap
+              Navigator.pushNamed(context, '/expand_user');
             },
             onHorizontalDragEnd: (details) {
               if (details.primaryVelocity! > 0) {
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                         left: 0,
                         child: IconButton(
                           icon: Icon(Icons.arrow_left),
-                          color: primaryColor,
+                          color: Colors.white,
                           onPressed: () {
                             _pageController.previousPage(
                               duration: Duration(milliseconds: 300),
@@ -119,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                         right: 0,
                         child: IconButton(
                           icon: Icon(Icons.arrow_right),
-                          color: primaryColor,
+                          color: Colors.white,
                           onPressed: () {
                             _pageController.nextPage(
                               duration: Duration(milliseconds: 300),
@@ -139,7 +140,8 @@ class _HomePageState extends State<HomePage> {
                         child: IconButton(
                           icon: Icon(Icons.close),
                           color: Colors.white,
-                          style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(error)),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(error)),
                           onPressed: () {
                             // Handle dislike tap
                             print("You disliked the person");
@@ -155,7 +157,9 @@ class _HomePageState extends State<HomePage> {
                         child: IconButton(
                           icon: Icon(Icons.favorite),
                           color: Colors.white,
-                          style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(success)),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(success)),
                           onPressed: () {
                             // Handle like tap
                             print("You liked the person");
@@ -176,10 +180,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         'User Name',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: header3,
                       ),
                       SizedBox(height: 16),
                       Container(
@@ -193,23 +194,16 @@ class _HomePageState extends State<HomePage> {
                               'Interest 3'
                             ];
                             final interest = interests[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: primaryColor, width: 1),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    interest,
-                                    style: TextStyle(
-                                      color: primaryColor,
-                                    ),
-                                  ),
-                                ),
+                            return Container(
+                              margin: EdgeInsets.only(right: 16),
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: primaryColor, width: 1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Center(
+                                child: Text(interest, style: paragraph_primary),
                               ),
                             );
                           },
@@ -221,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                         'User Bio that wraps to a max of 2 lines with ellipses cutting off anything past that.',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 14),
+                        style: paragraph,
                       ),
                     ],
                   ),

@@ -18,6 +18,7 @@ class CustomScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.transparent,
       appBar: appBar != null
           ? PreferredSize(
