@@ -160,8 +160,10 @@ class _ExpandedUserState extends State<ExpandedUser> {
                 children: [
                   Text(
                     'User Name',
-                    style: header3,
+                    style: header1,
                   ),
+                  SizedBox(height: 4),
+                      Text("22, Female", style: header6_primary),
                   SizedBox(height: 16),
                   Container(
                     height: 40,
@@ -174,7 +176,6 @@ class _ExpandedUserState extends State<ExpandedUser> {
                           'Interest 3'
                         ];
                         final interest = interests[index];
-                        print('Index: $index, Interest: $interest');
                         return Container(
                           margin: EdgeInsets.only(right: 16),
                           padding: EdgeInsets.all(8),

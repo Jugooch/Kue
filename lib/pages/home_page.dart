@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final PageController _pageController = PageController();
-  int _currentPage = 0; // Track the index of the current card
+  int _currentPage = 0; // Track the index of the current image in carousel
   bool _liked = false;
   bool _disliked = false;
 
@@ -180,8 +180,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         'User Name',
-                        style: header3,
+                        style: header1,
                       ),
+                      SizedBox(height: 4),
+                      Text("22, Female", style: header6_primary),
                       SizedBox(height: 16),
                       Container(
                         height: 40,
@@ -191,7 +193,9 @@ class _HomePageState extends State<HomePage> {
                             final interests = [
                               'Interest 1',
                               'Interest 2',
-                              'Interest 3'
+                              'Interest 3',
+                              'Interest 4',
+                              'Interest 5'
                             ];
                             final interest = interests[index];
                             return Container(
@@ -207,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             );
                           },
-                          itemCount: 3,
+                          itemCount: 5,
                         ),
                       ),
                       SizedBox(height: 16),

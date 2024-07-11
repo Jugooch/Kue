@@ -68,7 +68,7 @@ class _SignupStep5State extends State<SignupStep5> {
               Column(
                 children: [
                   Text(
-                    "Now let’s learn a little more about you. Hobbies/Interests are the main way Kue connects you with people. With this in mind, please select at between 3 to 5 interests/hobbies that you love.",
+                    "Next, you will pick out the images to showcase on your profile. We recommend picking photos of yourself that showcase your personality!",
                     style: paragraph_light
                   ),
                   SizedBox(height: 16),
