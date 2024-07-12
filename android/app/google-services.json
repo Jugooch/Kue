@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "96102029986",
+    "project_id": "kue-dating",
+    "storage_bucket": "kue-dating.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96102029986:android:c8cf4b00d103880a2b55fb",
+        "android_client_info": {
+          "package_name": "com.example.kue"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEE__-hJ3NUGBAHucKXcH-fpGCLeQtnbI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

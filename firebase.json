@@ -1,0 +1,22 @@
+{
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "kue-dating",
+                    "appId": "1:96102029986:android:c8cf4b00d103880a2b55fb",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "kue-dating",
+                    "configurations": {
+                        "android": "1:96102029986:android:c8cf4b00d103880a2b55fb",
+                        "ios": "1:96102029986:ios:6e52cfafe2c5dd192b55fb"
+                    }
+                }
+            }
+        }
+    }
+}

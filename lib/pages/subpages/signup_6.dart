@@ -1,7 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kue/custom_scaffold.dart';
 import 'package:kue/styling.dart';
 import 'package:kue/widgets/progress_bar.dart';
+import 'package:kue/models/models.dart'; // Ensure you import your UserModel
+import 'dart:io';
+import 'package:kue/dao/user_dao.dart'; // Ensure you import your UserDao
 
 class SignupStep6 extends StatefulWidget {
   const SignupStep6({super.key});
@@ -58,8 +64,43 @@ class _SignupStep6State extends State<SignupStep6> {
     super.dispose();
   }
 
+    Future<void> _uploadImagesAndSaveUser(UserModel userModel) async {
+
+
+    UserModel finalUser = UserModel(
+      age: userModel.age,
+      firstName: userModel.firstName,
+      lastName: userModel.lastName,
+      email: userModel.email,
+      password: userModel.password,
+      interests: userModel.interests,
+      images: userModel.images,
+      gender: _selectedGender ?? userModel.gender,
+      sexualOrientation: _selectedSexualOrientation ?? userModel.sexualOrientation,
+      preference: _selectedPreference ?? userModel.preference,
+    );
+
+    UserDao userDao = UserDao();
+    await userDao.signUp(finalUser.email, finalUser.password, finalUser);
+  }
+  Future<User?> _signInUser() async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: 'user@example.com',
+        password: 'password',
+      );
+      return userCredential.user;
+    } catch (e) {
+      print('Error signing in: $e');
+      return null;
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    final UserModel newUser = ModalRoute.of(context)!.settings.arguments as UserModel;
+
     return CustomScaffold(
       appBar: AppBar(
         title: Image.asset('assets/logos/logo.png'),
@@ -173,14 +214,17 @@ class _SignupStep6State extends State<SignupStep6> {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: primaryBtn,
-                  onPressed: () {
+                  onPressed: () async {
                     if (_selectedGender == null || _selectedSexualOrientation == null || _selectedPreference == null) {
                       // Show an error message or handle validation
                       return;
                     }
-                    Navigator.pushNamed(context, '/signup_7');
+                    else{
+                      await _uploadImagesAndSaveUser(newUser);
+                      Navigator.pushNamed(context, '/signup_7');
+                    }
                   },
-                  child: const Text('Next'),
+                  child: const Text('Complete'),
                 ),
               ),
             ],

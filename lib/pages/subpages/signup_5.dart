@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kue/custom_scaffold.dart';
+import 'package:kue/models/models.dart'; // Ensure you import your UserModel
 import 'package:kue/styling.dart';
 import 'package:kue/widgets/progress_bar.dart';
 import 'dart:io';
@@ -13,10 +14,7 @@ class SignupStep5 extends StatefulWidget {
 }
 
 class _SignupStep5State extends State<SignupStep5> {
-
-  List<String> selectedInterests = [];
   List<File?> selectedImages = List<File?>.filled(5, null);
-
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _pickImage(int index) async {
@@ -46,8 +44,37 @@ class _SignupStep5State extends State<SignupStep5> {
     );
   }
 
+  void moveToNext(UserModel userModel) {
+    if(selectedImages.length > 2 && selectedImages.length < 6){
+    List<String> imagePaths = selectedImages
+        .where((file) => file != null)
+        .map((file) => file!.path)
+        .toList();
+
+    UserModel updatedUser = UserModel(
+      age: userModel.age,
+      firstName: userModel.firstName,
+      lastName: userModel.lastName,
+      email: userModel.email,
+      password: userModel.password,
+      interests: userModel.interests,
+      images: imagePaths,
+      gender: userModel.gender,
+      sexualOrientation: userModel.sexualOrientation,
+      preference: userModel.preference,
+    );
+
+    Navigator.pushNamed(
+      context,
+      '/signup_6',
+      arguments: updatedUser,
+    );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final UserModel newUser = ModalRoute.of(context)!.settings.arguments as UserModel;
     return CustomScaffold(
       appBar: AppBar(
         title: Image.asset('assets/logos/logo.png'),
@@ -56,7 +83,6 @@ class _SignupStep5State extends State<SignupStep5> {
       ),
       body: InkWell(
         onTap: () {
-          // Close keyboard when tapping outside of it
           FocusScope.of(context).unfocus();
         },
         child: Padding(
@@ -88,7 +114,7 @@ class _SignupStep5State extends State<SignupStep5> {
                 child: ElevatedButton(
                   style: primaryBtn,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signup_6');
+                    moveToNext(newUser);
                   },
                   child: const Text('Next'),
                 ),

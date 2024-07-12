@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kue/custom_scaffold.dart';
+import 'package:kue/models/models.dart';
 import 'package:kue/styling.dart';
 import 'package:kue/widgets/progress_bar.dart';
 
@@ -31,6 +32,8 @@ class _SignupStep3State extends State<SignupStep3> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+  var newUser = UserModel(firstName: '', lastName: '', age: 0, email: '', password: '', interests: [], images: [], gender: '', sexualOrientation: '', preference: '');
 
   @override
   void initState() {
@@ -103,17 +106,49 @@ class _SignupStep3State extends State<SignupStep3> {
     return null;
   }
 
-  String? validatePassword(String? value) {
+  bool validatePassword(String? value) {
     final passwordPattern =
         RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$&*~]).{8,}$');
     if (value == null || value.isEmpty) {
-      return 'Please enter a password';
+      return false;
     }
     if (!passwordPattern.hasMatch(value)) {
-      return 'Password must be at least 8 characters long and include a capital letter, lowercase letter, number, and special character';
+      return false;
     }
-    return null;
+    return true;
   }
+
+void moveToNext() {
+  if (_firstNameController.text.isNotEmpty &&
+      _lastNameController.text.isNotEmpty &&
+      (int.parse(_ageController.text).toString().isNotEmpty && int.parse(_ageController.text) > 17 && int.parse(_ageController.text) < 120) &&
+      _emailController.text.isNotEmpty &&
+      validatePassword(_passwordController.text)) {
+    
+    UserModel newUser = UserModel(
+      age: int.parse(_ageController.text),
+      firstName: _firstNameController.text,
+      lastName: _lastNameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+      interests: [],
+      images: [],
+      gender: '',
+      sexualOrientation: '',
+      preference: '',
+    );
+
+    
+    print("Setup page 3, successfully entered info, moving to step 5");
+
+    Navigator.pushNamed(
+      context,
+      '/signup_4',
+      arguments: newUser,
+    );
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -262,18 +297,7 @@ class _SignupStep3State extends State<SignupStep3> {
                       child: ElevatedButton(
                         style: primaryBtn,
                         onPressed: () {
-                          final ageValidation =
-                              validateAge(_ageController.text);
-                          final passwordValidation =
-                              validatePassword(_passwordController.text);
-                          // if (ageValidation != null ||
-                          //     passwordValidation != null) {
-                          //   // Handle validation errors
-                          // } else {
-                          //   // Proceed to the next step
-                          //   Navigator.pushNamed(context, '/signup_4');
-                          // }
-                          Navigator.pushNamed(context, '/signup_4');
+                          moveToNext();
                         },
                         child: const Text('Next'),
                       ),

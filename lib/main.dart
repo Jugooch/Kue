@@ -3,8 +3,14 @@ import 'package:kue/custom_scaffold.dart';
 import 'package:kue/pages/subpages/subpages.dart';
 import 'package:kue/styling.dart';
 import './pages/pages.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -27,9 +33,9 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => const SignupProcess(),
         '/signup_2': (context) => const SignupStep2(),
         '/signup_3': (context) => const SignupStep3(),
-        '/signup_4': (context) => const SignupStep4(),
-        '/signup_5': (context) => const SignupStep5(),
-        '/signup_6': (context) => const SignupStep6(),
+        '/signup_4': (context) => SignupStep4(),
+        '/signup_5': (context) => SignupStep5(),
+        '/signup_6': (context) => SignupStep6(),
         '/signup_7': (context) => const SignupStep7(),
         '/home': (context) => const MyHomePage(),
         '/expand_user': (context) => const ExpandedUser(),

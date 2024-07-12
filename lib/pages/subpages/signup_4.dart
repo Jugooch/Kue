@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kue/custom_scaffold.dart';
+import 'package:kue/models/models.dart';
 import 'package:kue/styling.dart';
 import 'package:kue/widgets/progress_bar.dart';
 
@@ -45,8 +46,22 @@ class _SignupStep4State extends State<SignupStep4> {
     });
   }
 
+  void moveToNext(UserModel userModel){
+    if(selectedInterests.length > 2 && selectedInterests.length < 6){
+      UserModel newUser = UserModel(age: userModel.age, firstName: userModel.firstName, lastName: userModel.lastName, email: userModel.email, password: userModel.password, interests: selectedInterests, images: [],  gender: '', sexualOrientation: '', preference: '');
+
+      print("Setup page 4, successfully entered info, moving to step 5");
+      Navigator.pushNamed(
+      context,
+      '/signup_5',
+      arguments: newUser,
+    );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final UserModel newUser = ModalRoute.of(context)!.settings.arguments as UserModel;
     return CustomScaffold(
       appBar: AppBar(
         title: Image.asset('assets/logos/logo.png'),
@@ -106,7 +121,7 @@ class _SignupStep4State extends State<SignupStep4> {
                 child: ElevatedButton(
                   style: primaryBtn,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signup_5');
+                    moveToNext(newUser);
                   },
                   child: const Text('Next'),
                 ),

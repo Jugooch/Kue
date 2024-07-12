@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kue/custom_scaffold.dart';
+import 'package:kue/dao/user_dao.dart';
 import 'package:kue/styling.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -264,6 +265,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: ElevatedButton(
                     style: errorBtn,
                     onPressed: () {
+                      UserDao().signOut();
                       Navigator.pushNamedAndRemoveUntil(
                         context,
                         '/',
